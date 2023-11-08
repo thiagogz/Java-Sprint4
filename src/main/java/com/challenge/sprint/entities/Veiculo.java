@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,20 +15,29 @@ public class Veiculo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idVeiculo;
-	private Long idMarca;
-	private Long idTipoVeiculo;
-	private Long idModelo;
 	private boolean chassiAlongado;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_marca")
+	private Marca marca;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_tipo_veiculo")
+	private TipoVeiculo tv;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_modelo")
+	private Modelo modelo;
 	
 	public Veiculo() {
 		
 	}
-	
-	public Veiculo(Long idVeiculo, Long idMarca, Long idTipoVeiculo, Long idModelo, boolean chassiAlongado) {
+
+	public Veiculo(Long idVeiculo, Marca marca, TipoVeiculo tv, Modelo modelo, boolean chassiAlongado) {
 		this.idVeiculo = idVeiculo;
-		this.idMarca = idMarca;
-		this.idTipoVeiculo = idTipoVeiculo;
-		this.idModelo = idModelo;
+		this.marca = marca;
+		this.tv = tv;
+		this.modelo = modelo;
 		this.chassiAlongado = chassiAlongado;
 	}
 
@@ -38,28 +49,28 @@ public class Veiculo {
 		this.idVeiculo = idVeiculo;
 	}
 
-	public Long getIdMarca() {
-		return idMarca;
+	public Marca getMarca() {
+		return marca;
 	}
 
-	public void setIdMarca(Long idMarca) {
-		this.idMarca = idMarca;
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
 
-	public Long getIdTipoVeiculo() {
-		return idTipoVeiculo;
+	public TipoVeiculo getTv() {
+		return tv;
 	}
 
-	public void setIdTipoVeiculo(Long idTipoVeiculo) {
-		this.idTipoVeiculo = idTipoVeiculo;
+	public void setTv(TipoVeiculo tv) {
+		this.tv = tv;
 	}
 
-	public Long getIdModelo() {
-		return idModelo;
+	public Modelo getModelo() {
+		return modelo;
 	}
 
-	public void setIdModelo(Long idModelo) {
-		this.idModelo = idModelo;
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
 	}
 
 	public boolean isChassiAlongado() {

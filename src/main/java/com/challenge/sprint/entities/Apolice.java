@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,19 +17,22 @@ public class Apolice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idApolice;
-	private Long idCliente;
 	private boolean status;
 	private double valor;
 	private Date vigencia;
 	private String placa;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_veiculo")
+	private Veiculo veiculo;
+	
 	public Apolice() {
 		
 	}
-
-	public Apolice(Long idApolice, Long idCliente, boolean status, double valor, Date vigencia, String placa) {
+	
+	public Apolice(Long idApolice, Veiculo veiculo, boolean status, double valor, Date vigencia, String placa) {
 		this.idApolice = idApolice;
-		this.idCliente = idCliente;
+		this.veiculo = veiculo;
 		this.status = status;
 		this.valor = valor;
 		this.vigencia = vigencia;
@@ -42,12 +47,12 @@ public class Apolice {
 		this.idApolice = idApolice;
 	}
 
-	public Long getIdCliente() {
-		return idCliente;
+	public Veiculo getVeiculo() {
+		return veiculo;
 	}
 
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
 	}
 
 	public boolean isStatus() {

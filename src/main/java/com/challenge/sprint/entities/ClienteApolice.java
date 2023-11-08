@@ -1,38 +1,44 @@
 package com.challenge.sprint.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_hl_cliente_apolice")
-public class ClienteApolice {
+public class ClienteApolice {	
+	@ManyToMany
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente;
 	
-	private Long idCliente;
-	private Long idApolice;
+	@ManyToMany
+	@JoinColumn(name = "id_apolice")
+	private Apolice apolice;
 	
 	public ClienteApolice() {
 		
 	}
-	
-	public ClienteApolice(Long idCliente, Long idApolice) {
-		this.idCliente = idCliente;
-		this.idApolice = idApolice;
+
+	public ClienteApolice(Cliente cliente, Apolice apolice) {
+		this.cliente = cliente;
+		this.apolice = apolice;
 	}
 
-	public Long getIdCliente() {
-		return idCliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
-	public Long getIdApolice() {
-		return idApolice;
+	public Apolice getApolice() {
+		return apolice;
 	}
 
-	public void setIdApolice(Long idApolice) {
-		this.idApolice = idApolice;
+	public void setApolice(Apolice apolice) {
+		this.apolice = apolice;
 	}
 	
 	

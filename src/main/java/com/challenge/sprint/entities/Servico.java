@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,26 +17,32 @@ public class Servico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idServico;
-	private Long idCliente;
-	private Long idPrestadorModal;
 	private Timestamp horaServico;
 	private String localUsuario;
 	private boolean statusOrdem;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_prestador_modal")
+	private PrestadorModal pm;
 	
 	public Servico() {
 		
 	}
 	
-	public Servico(Long idServico, Long idCliente, Long idPrestadorModal, Timestamp horaServico, String localUsuario,
+	public Servico(Long idServico, Cliente cliente, PrestadorModal pm, Timestamp horaServico, String localUsuario,
 			boolean statusOrdem) {
 		this.idServico = idServico;
-		this.idCliente = idCliente;
-		this.idPrestadorModal = idPrestadorModal;
+		this.cliente = cliente;
+		this.pm = pm;
 		this.horaServico = horaServico;
 		this.localUsuario = localUsuario;
 		this.statusOrdem = statusOrdem;
 	}
-	
+
 	public Long getIdServico() {
 		return idServico;
 	}
@@ -43,20 +51,20 @@ public class Servico {
 		this.idServico = idServico;
 	}
 	
-	public Long getIdCliente() {
-		return idCliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
-	
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
-	
-	public Long getIdPrestadorModal() {
-		return idPrestadorModal;
+
+	public PrestadorModal getPm() {
+		return pm;
 	}
-	
-	public void setIdPrestadorModal(Long idPrestadorModal) {
-		this.idPrestadorModal = idPrestadorModal;
+
+	public void setPm(PrestadorModal pm) {
+		this.pm = pm;
 	}
 	
 	public Timestamp getHoraServico() {

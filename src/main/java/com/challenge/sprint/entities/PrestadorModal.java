@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,18 +15,24 @@ public class PrestadorModal {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPrestadorModal;
-	private Long idPrestador;
-	private Long idModal;
 	private String placaGuincho;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_prestador")
+	private Prestador prestador;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_modal")
+	private Modal modal;
 	
 	public PrestadorModal() {
 		
 	}
-	
-	public PrestadorModal(Long idPrestadorModal, Long idPrestador, Long idModal, String placaGuincho) {
+
+	public PrestadorModal(Long idPrestadorModal, Prestador prestador, Modal modal, String placaGuincho) {
 		this.idPrestadorModal = idPrestadorModal;
-		this.idPrestador = idPrestador;
-		this.idModal = idModal;
+		this.prestador = prestador;
+		this.modal = modal;
 		this.placaGuincho = placaGuincho;
 	}
 	
@@ -36,22 +44,22 @@ public class PrestadorModal {
 		this.idPrestadorModal = idPrestadorModal;
 	}
 	
-	public Long getIdPrestador() {
-		return idPrestador;
+	public Prestador getPrestador() {
+		return prestador;
 	}
-	
-	public void setIdPrestador(Long idPrestador) {
-		this.idPrestador = idPrestador;
+
+	public void setPrestador(Prestador prestador) {
+		this.prestador = prestador;
 	}
-	
-	public Long getIdModal() {
-		return idModal;
+
+	public Modal getModal() {
+		return modal;
 	}
-	
-	public void setIdModal(Long idModal) {
-		this.idModal = idModal;
+
+	public void setModal(Modal modal) {
+		this.modal = modal;
 	}
-	
+
 	public String getPlacaGuincho() {
 		return placaGuincho;
 	}
