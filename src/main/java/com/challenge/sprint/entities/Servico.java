@@ -17,9 +17,9 @@ public class Servico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idServico;
-	private Timestamp horaServico;
+	private String horaServico;
 	private String localUsuario;
-	private boolean statusOrdem;
+	private String statusOrdem;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_cliente")
@@ -33,8 +33,8 @@ public class Servico {
 		
 	}
 	
-	public Servico(Long idServico, Cliente cliente, PrestadorModal pm, Timestamp horaServico, String localUsuario,
-			boolean statusOrdem) {
+	public Servico(Long idServico, Cliente cliente, PrestadorModal pm, String horaServico, String localUsuario,
+			String statusOrdem) {
 		this.idServico = idServico;
 		this.cliente = cliente;
 		this.pm = pm;
@@ -67,11 +67,11 @@ public class Servico {
 		this.pm = pm;
 	}
 	
-	public Timestamp getHoraServico() {
+	public String getHoraServico() {
 		return horaServico;
 	}
 	
-	public void setHoraServico(Timestamp horaServico) {
+	public void setHoraServico(String horaServico) {
 		this.horaServico = horaServico;
 	}
 	
@@ -83,11 +83,11 @@ public class Servico {
 		this.localUsuario = localUsuario;
 	}
 	
-	public boolean isStatusOrdem() {
+	public String getStatusOrdem() {
 		return statusOrdem;
 	}
 	
-	public void setStatusOrdem(boolean statusOrdem) {
+	public void setStatusOrdem(String statusOrdem) {
 		this.statusOrdem = statusOrdem;
 	}
 }

@@ -13,26 +13,26 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCliente;
-	private String nome;
-	private String email;
-	private String address;
-	private Long phone;
-	private String type;
-	private Long cpfCnpj;
+	private String nomeCliente;
+	private String senhaCliente;
+	private String enderecoCliente;
+	private Long telefoneCliente;
+	private String tipoCliente;
+	private String cpfCnpjCliente;
 	
 	public Cliente() {
 		
 	}
 
-	public Cliente(Long idCliente, String nome, String email, String address, Long phone, String type, Long cpfCnpj) {
+	public Cliente(Long idCliente, String nomeCliente, String senhaCliente, String enderecoCliente, Long telefoneCliente, String tipoCliente, String cpfCnpjCliente) {
 		super();
 		this.idCliente = idCliente;
-		this.nome = nome;
-		this.email = email;
-		this.address = address;
-		this.phone = phone;
-		this.type = type;
-		this.cpfCnpj = cpfCnpj;
+		this.nomeCliente = nomeCliente;
+		this.senhaCliente = senhaCliente;
+		this.enderecoCliente = enderecoCliente;
+		this.telefoneCliente = telefoneCliente;
+		this.tipoCliente = tipoCliente;
+		this.cpfCnpjCliente = cpfCnpjCliente;
 	}
 
 	public Long getIdCliente() {
@@ -43,51 +43,51 @@ public class Cliente {
 		this.idCliente = idCliente;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeCliente() {
+		return nomeCliente;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getSenhaCliente() {
+		return senhaCliente;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setSenhaCliente(String senhaCliente) {
+		this.senhaCliente = senhaCliente;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getEnderecoCliente() {
+		return enderecoCliente;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setEnderecoCliente(String enderecoCliente) {
+		this.enderecoCliente = enderecoCliente;
 	}
 
-	public Long getPhone() {
-		return phone;
+	public Long getTelefoneCliente() {
+		return telefoneCliente;
 	}
 
-	public void setPhone(Long phone) {
-		this.phone = phone;
+	public void setTelefoneCliente(Long telefoneCliente) {
+		this.telefoneCliente = telefoneCliente;
 	}
 
-	public String getType() {
-		return type;
+	public String getTipoCliente() {
+		return tipoCliente;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTipoCliente(String tipoCliente) {
+		this.tipoCliente = tipoCliente;
 	}
 
-	public Long getCpfCnpj() {
-		return cpfCnpj;
+	public String getCpfCnpjCliente() {
+		return cpfCnpjCliente;
 	}
 
-	public void setCpfCnpj(Long cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
+	public void setCpfCnpjCliente(String cpfCnpjCliente) {
+		this.cpfCnpjCliente = cpfCnpjCliente;
 	}
 }

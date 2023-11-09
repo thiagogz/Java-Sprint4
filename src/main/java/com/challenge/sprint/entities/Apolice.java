@@ -17,10 +17,10 @@ public class Apolice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idApolice;
-	private boolean status;
-	private double valor;
-	private Date vigencia;
-	private String placa;
+	private String statusApolice;
+	private double valorApolice;
+	private Date vigenciaApolice;
+	private String placaVeiculo;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_veiculo")
@@ -30,13 +30,13 @@ public class Apolice {
 		
 	}
 	
-	public Apolice(Long idApolice, Veiculo veiculo, boolean status, double valor, Date vigencia, String placa) {
+	public Apolice(Long idApolice, Veiculo veiculo, String statusApolice, double valorApolice, Date vigenciaApolice, String placaVeiculo) {
 		this.idApolice = idApolice;
 		this.veiculo = veiculo;
-		this.status = status;
-		this.valor = valor;
-		this.vigencia = vigencia;
-		this.placa = placa;
+		this.statusApolice = statusApolice;
+		this.valorApolice = valorApolice;
+		this.vigenciaApolice = vigenciaApolice;
+		this.placaVeiculo = placaVeiculo;
 	}
 
 	public Long getIdApolice() {
@@ -55,36 +55,36 @@ public class Apolice {
 		this.veiculo = veiculo;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public String getStatusApolice() {
+		return statusApolice;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setStatusApolice(String statusApolice) {
+		this.statusApolice = statusApolice;
 	}
 
-	public double getValor() {
-		return valor;
+	public double getValorApolice() {
+		return valorApolice;
 	}
 
-	public void setValor(double valor) {
-		this.valor = valor;
+	public void setValorApolice(double valorApolice) {
+		this.valorApolice = valorApolice;
 	}
 
-	public Date getVigencia() {
-		return vigencia;
+	public Date getVigenciaApolice() {
+		return vigenciaApolice;
 	}
 
-	public void setVigencia(Date vigencia) {
-		this.vigencia = vigencia;
+	public void setVigenciaApolice(Date vigenciaApolice) {
+		this.vigenciaApolice = vigenciaApolice;
 	}
 
-	public String getPlaca() {
-		return placa;
+	public String getPlacaVeiculo() {
+		return placaVeiculo;
 	}
 
-	public void setPlaca(String placa) {
-		this.placa = placa;
+	public void setPlacaVeiculo(String placaVeiculo) {
+		this.placaVeiculo = placaVeiculo;
 	}
 
 	

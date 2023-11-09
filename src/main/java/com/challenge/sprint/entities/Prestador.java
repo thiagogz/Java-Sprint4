@@ -18,16 +18,16 @@ public class Prestador {
 	private String localPrestador;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_empresa_prestador")
-	private EmpresaFuncionario ef;
+	@JoinColumn(name = "id_empresa_funcionario")
+	private EmpresaFuncionario idEmpresaFuncionario;
 	
 	public Prestador() {
 		
 	}
 	
-	public Prestador(Long idPrestador, EmpresaFuncionario ef, String localPrestador) {
+	public Prestador(Long idPrestador, EmpresaFuncionario idEmpresaFuncionario, String localPrestador) {
 		this.idPrestador = idPrestador;
-		this.ef = ef;
+		this.idEmpresaFuncionario = idEmpresaFuncionario;
 		this.localPrestador = localPrestador;
 	}
 	
@@ -39,12 +39,12 @@ public class Prestador {
 		this.idPrestador = idPrestador;
 	}
 	
-	public EmpresaFuncionario getEf() {
-		return ef;
+	public EmpresaFuncionario getIdEmpresaFuncionario() {
+		return idEmpresaFuncionario;
 	}
 
-	public void setEf(EmpresaFuncionario ef) {
-		this.ef = ef;
+	public void setidEmpresaFuncionario(EmpresaFuncionario idEmpresaFuncionario) {
+		this.idEmpresaFuncionario = idEmpresaFuncionario;
 	}
 
 	public String getLocalPrestador() {
