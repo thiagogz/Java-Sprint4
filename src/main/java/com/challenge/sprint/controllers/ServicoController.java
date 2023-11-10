@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.sprint.entities.Cliente;
-import com.challenge.sprint.repositories.ClienteRepository;
+import com.challenge.sprint.entities.Servico;
+import com.challenge.sprint.repositories.ServicoRepository;
 
 @RestController
-@RequestMapping(value = "/clientes")
-public class ClienteControllers {
+@RequestMapping(value = "/servicos")
+public class ServicoController {
 	@Autowired 
-	private ClienteRepository repository;
+	private ServicoRepository repository;
 	
 	@GetMapping
-	public List<Cliente> findAll() {
-		List<Cliente> result = repository.findAll();
+	public List<Servico> findAll() {
+		List<Servico> result = repository.findAll();
 		return result;
 	}
 	
 	@GetMapping(value = "/{id}")
-	public Cliente findById (@PathVariable Long id) {
-		Cliente result = repository.findById(id).get();
+	public Servico findById (@PathVariable Long id) {
+		Servico result = repository.findById(id).get();
 		return result;
 	}
 }

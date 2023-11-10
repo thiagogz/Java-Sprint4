@@ -27,9 +27,18 @@ public class ClienteApolice {
 		
 	}
 
-	public ClienteApolice(Cliente cliente, Apolice apolice) {
+	public ClienteApolice(Long idClienteApolice, Cliente cliente, Apolice apolice) {
+		this.idClienteApolice = idClienteApolice;
 		this.cliente = cliente;
 		this.apolice = apolice;
+	}
+
+	public Long getIdClienteApolice() {
+		return idClienteApolice;
+	}
+
+	public void setIdClienteApolice(Long idClienteApolice) {
+		this.idClienteApolice = idClienteApolice;
 	}
 
 	public Cliente getCliente() {

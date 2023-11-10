@@ -1,7 +1,5 @@
 package com.challenge.sprint.entities;
 
-import java.sql.Timestamp;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,17 +25,17 @@ public class Servico {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_prestador_modal")
-	private PrestadorModal pm;
+	private PrestadorModal prestadorModal;
 	
 	public Servico() {
 		
 	}
 	
-	public Servico(Long idServico, Cliente cliente, PrestadorModal pm, String horaServico, String localUsuario,
+	public Servico(Long idServico, Cliente cliente, PrestadorModal prestadorModal, String horaServico, String localUsuario,
 			String statusOrdem) {
 		this.idServico = idServico;
 		this.cliente = cliente;
-		this.pm = pm;
+		this.prestadorModal = prestadorModal;
 		this.horaServico = horaServico;
 		this.localUsuario = localUsuario;
 		this.statusOrdem = statusOrdem;
@@ -59,12 +57,12 @@ public class Servico {
 		this.cliente = cliente;
 	}
 
-	public PrestadorModal getPm() {
-		return pm;
+	public PrestadorModal getPrestadorModal() {
+		return prestadorModal;
 	}
 
-	public void setPm(PrestadorModal pm) {
-		this.pm = pm;
+	public void setPrestadorModal(PrestadorModal prestadorModal) {
+		this.prestadorModal = prestadorModal;
 	}
 	
 	public String getHoraServico() {

@@ -23,7 +23,7 @@ public class Veiculo {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_tipo_veiculo")
-	private TipoVeiculo tv;
+	private TipoVeiculo tipoVeiculo;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_modelo")
@@ -33,10 +33,10 @@ public class Veiculo {
 		
 	}
 
-	public Veiculo(Long idVeiculo, Marca marca, TipoVeiculo tv, Modelo modelo, boolean chassiAlongado) {
+	public Veiculo(Long idVeiculo, Marca marca, TipoVeiculo tipoVeiculo, Modelo modelo, boolean chassiAlongado) {
 		this.idVeiculo = idVeiculo;
 		this.marca = marca;
-		this.tv = tv;
+		this.tipoVeiculo = tipoVeiculo;
 		this.modelo = modelo;
 		this.chassiAlongado = chassiAlongado;
 	}
@@ -57,12 +57,12 @@ public class Veiculo {
 		this.marca = marca;
 	}
 
-	public TipoVeiculo getTv() {
-		return tv;
+	public TipoVeiculo getTipoVeiculo() {
+		return tipoVeiculo;
 	}
 
-	public void setTv(TipoVeiculo tv) {
-		this.tv = tv;
+	public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
 	}
 
 	public Modelo getModelo() {
