@@ -25,7 +25,6 @@ public class Cliente {
 	}
 
 	public Cliente(Long idCliente, String nomeCliente, String senhaCliente, String enderecoCliente, Long telefoneCliente, String tipoCliente, String cpfCnpjCliente) {
-		super();
 		this.idCliente = idCliente;
 		this.nomeCliente = nomeCliente;
 		this.senhaCliente = senhaCliente;
