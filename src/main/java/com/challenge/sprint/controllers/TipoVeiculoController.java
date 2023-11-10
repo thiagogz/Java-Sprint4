@@ -3,29 +3,34 @@ package com.challenge.sprint.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.sprint.entities.TipoVeiculo;
-import com.challenge.sprint.repositories.TipoVeiculoRepository;
+import com.challenge.sprint.services.TipoVeiculoService;
 
 @RestController
 @RequestMapping(value = "/tipos-veiculos")
 public class TipoVeiculoController {
-	@Autowired 
-	private TipoVeiculoRepository repository;
+	private final TipoVeiculoService tipoVeiculoService;
+	
+	@Autowired
+	public TipoVeiculoController(TipoVeiculoService tipoVeiculoService) {
+        this.tipoVeiculoService = tipoVeiculoService;
+    }
 	
 	@GetMapping
-	public List<TipoVeiculo> findAll() {
-		List<TipoVeiculo> result = repository.findAll();
-		return result;
+	public ResponseEntity<List<TipoVeiculo>> findAll() {
+		List<TipoVeiculo> tiposVeiculos = tipoVeiculoService.getAllTipoVeiculo();
+		return ResponseEntity.ok(tiposVeiculos);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public TipoVeiculo findById (@PathVariable Long id) {
-		TipoVeiculo result = repository.findById(id).get();
+	public TipoVeiculo findTipoVeiculoById (@PathVariable Long id) {
+		TipoVeiculo result = tipoVeiculoService.findTipoVeiculoById(id);
 		return result;
 	}
 }

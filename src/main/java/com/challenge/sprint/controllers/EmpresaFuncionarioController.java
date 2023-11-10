@@ -3,29 +3,34 @@ package com.challenge.sprint.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.sprint.entities.EmpresaFuncionario;
-import com.challenge.sprint.repositories.EmpresaFuncionarioRepository;
+import com.challenge.sprint.services.EmpresaFuncionarioService;
 
 @RestController
 @RequestMapping(value = "/empresa-funcionarios")
 public class EmpresaFuncionarioController {
-	@Autowired 
-	private EmpresaFuncionarioRepository repository;
+	private final EmpresaFuncionarioService empresaFuncionarioService;
+	
+	@Autowired
+	public EmpresaFuncionarioController(EmpresaFuncionarioService empresaFuncionarioService) {
+        this.empresaFuncionarioService = empresaFuncionarioService;
+    }
 	
 	@GetMapping
-	public List<EmpresaFuncionario> findAll() {
-		List<EmpresaFuncionario> result = repository.findAll();
-		return result;
+	public ResponseEntity<List<EmpresaFuncionario>> findAll() {
+		List<EmpresaFuncionario> empresaFuncionario = empresaFuncionarioService.getAllEmpresaFuncionario();
+		return ResponseEntity.ok(empresaFuncionario);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public EmpresaFuncionario findById (@PathVariable Long id) {
-		EmpresaFuncionario result = repository.findById(id).get();
+	public EmpresaFuncionario findEmpresaFuncionarioById (@PathVariable Long id) {
+		EmpresaFuncionario result = empresaFuncionarioService.findEmpresaFuncionarioById(id);
 		return result;
 	}
 }
