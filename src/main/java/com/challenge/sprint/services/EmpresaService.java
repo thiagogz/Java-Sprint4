@@ -1,10 +1,10 @@
 package com.challenge.sprint.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.challenge.sprint.entities.Empresa;
 import com.challenge.sprint.repositories.EmpresaRepository;
@@ -18,12 +18,30 @@ public class EmpresaService {
         this.empresaRepository = empresaRepository;
     }
 
-	public List<Empresa> getAllEmpresa() {
-		return empresaRepository.findAll();
-	}
-	
-	public Empresa findEmpresaById (@PathVariable Long id) {
-		Empresa result = empresaRepository.findById(id).get();
-		return result;
-	}
+	public List<Empresa> getAllEmpresas() {
+        return empresaRepository.findAll();
+    }
+
+    public Optional<Empresa> findEmpresaById(Long id) {
+        return empresaRepository.findById(id);
+    }
+
+    public Empresa saveEmpresa(Empresa empresa) {
+        return empresaRepository.save(empresa);
+    }
+
+    public void deleteEmpresa(Long id) {
+        empresaRepository.deleteById(id);
+    }
+
+    public Empresa updateEmpresa(Long id, Empresa empresaDetails) {
+        Empresa empresa = empresaRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Empresa não encontrada"));
+        
+        empresa.setNomeEmpresa(empresaDetails.getNomeEmpresa());
+        empresa.setTelefoneEmpresa(empresaDetails.getTelefoneEmpresa());
+        // outros campos conforme necessário
+        
+        return empresaRepository.save(empresa);
+    }
 }
