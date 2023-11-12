@@ -1,36 +1,52 @@
 package com.challenge.sprint.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.challenge.sprint.entities.TipoVeiculo;
 import com.challenge.sprint.services.TipoVeiculoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(value = "/tipos-veiculos")
+@RequestMapping("/tipos-veiculos")
 public class TipoVeiculoController {
-	private final TipoVeiculoService tipoVeiculoService;
-	
-	@Autowired
-	public TipoVeiculoController(TipoVeiculoService tipoVeiculoService) {
+
+    private final TipoVeiculoService tipoVeiculoService;
+
+    @Autowired
+    public TipoVeiculoController(TipoVeiculoService tipoVeiculoService) {
         this.tipoVeiculoService = tipoVeiculoService;
     }
-	
-	@GetMapping
-	public ResponseEntity<List<TipoVeiculo>> findAll() {
-		List<TipoVeiculo> tiposVeiculos = tipoVeiculoService.getAllTipoVeiculo();
-		return ResponseEntity.ok(tiposVeiculos);
-	}
-	
-	@GetMapping(value = "/{id}")
-	public TipoVeiculo findTipoVeiculoById (@PathVariable Long id) {
-		TipoVeiculo result = tipoVeiculoService.findTipoVeiculoById(id);
-		return result;
-	}
+
+    @GetMapping
+    public List<TipoVeiculo> getAllTipoVeiculos() {
+        return tipoVeiculoService.getAllTipoVeiculos();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TipoVeiculo> getTipoVeiculoById(@PathVariable Long id) {
+        TipoVeiculo tipoVeiculo = tipoVeiculoService.findTipoVeiculoById(id)
+            .orElseThrow(() -> new RuntimeException("Tipo de Veículo não encontrado"));
+        return ResponseEntity.ok(tipoVeiculo);
+    }
+
+    @PostMapping
+    public ResponseEntity<TipoVeiculo> createTipoVeiculo(@RequestBody TipoVeiculo tipoVeiculo) {
+        TipoVeiculo novoTipoVeiculo = tipoVeiculoService.saveTipoVeiculo(tipoVeiculo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoTipoVeiculo);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TipoVeiculo> updateTipoVeiculo(@PathVariable Long id, @RequestBody TipoVeiculo tipoVeiculo) {
+        TipoVeiculo tipoVeiculoAtualizado = tipoVeiculoService.updateTipoVeiculo(id, tipoVeiculo);
+        return ResponseEntity.ok(tipoVeiculoAtualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTipoVeiculo(@PathVariable Long id) {
+        tipoVeiculoService.deleteTipoVeiculo(id);
+        return ResponseEntity.noContent().build();
+    }
 }
