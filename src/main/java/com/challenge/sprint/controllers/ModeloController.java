@@ -1,36 +1,52 @@
 package com.challenge.sprint.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.challenge.sprint.entities.Modelo;
 import com.challenge.sprint.services.ModeloService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(value = "/modelos")
+@RequestMapping("/modelos")
 public class ModeloController {
-	private final ModeloService modeloService;
-	
-	@Autowired
-	public ModeloController(ModeloService modeloService) {
+
+    private final ModeloService modeloService;
+
+    @Autowired
+    public ModeloController(ModeloService modeloService) {
         this.modeloService = modeloService;
     }
-	
-	@GetMapping
-	public ResponseEntity<List<Modelo>> findAll() {
-		List<Modelo> modelos = modeloService.getAllModelo();
-		return ResponseEntity.ok(modelos);
-	}
-	
-	@GetMapping(value = "/{id}")
-	public Modelo findModeloById (@PathVariable Long id) {
-		Modelo result = modeloService.findModeloById(id);
-		return result;
-	}
+
+    @GetMapping
+    public List<Modelo> getAllModelos() {
+        return modeloService.getAllModelos();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Modelo> getModeloById(@PathVariable Long id) {
+        Modelo modelo = modeloService.findModeloById(id)
+            .orElseThrow(() -> new RuntimeException("Modelo não encontrado"));
+        return ResponseEntity.ok(modelo);
+    }
+
+    @PostMapping
+    public ResponseEntity<Modelo> createModelo(@RequestBody Modelo modelo) {
+        Modelo novoModelo = modeloService.saveModelo(modelo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoModelo);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Modelo> updateModelo(@PathVariable Long id, @RequestBody Modelo modelo) {
+        Modelo modeloAtualizado = modeloService.updateModelo(id, modelo);
+        return ResponseEntity.ok(modeloAtualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteModelo(@PathVariable Long id) {
+        modeloService.deleteModelo(id);
+        return ResponseEntity.noContent().build();
+    }
 }

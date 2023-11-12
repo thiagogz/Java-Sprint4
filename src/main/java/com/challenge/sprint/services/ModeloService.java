@@ -1,29 +1,51 @@
 package com.challenge.sprint.services;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.challenge.sprint.entities.Modelo;
 import com.challenge.sprint.repositories.ModeloRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ModeloService {
-	private final ModeloRepository modeloRepository;
-	
-	@Autowired
+
+    private final ModeloRepository modeloRepository;
+
+    @Autowired
     public ModeloService(ModeloRepository modeloRepository) {
         this.modeloRepository = modeloRepository;
     }
 
-	public List<Modelo> getAllModelo() {
-		return modeloRepository.findAll();
-	}
-	
-	public Modelo findModeloById (@PathVariable Long id) {
-		Modelo result = modeloRepository.findById(id).get();
-		return result;
-	}
+    public List<Modelo> getAllModelos() {
+        return modeloRepository.findAll();
+    }
+
+    public Optional<Modelo> findModeloById(Long id) {
+        return modeloRepository.findById(id);
+    }
+
+    public Modelo saveModelo(Modelo modelo) {
+        return modeloRepository.save(modelo);
+    }
+
+    public void deleteModelo(Long id) {
+        modeloRepository.deleteById(id);
+    }
+
+    public Modelo updateModelo(Long id, Modelo modeloDetails) {
+        Modelo modelo = modeloRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Modelo não encontrado"));
+
+        modelo.setModeloVeiculo(modeloDetails.getModeloVeiculo());
+        modelo.setAnoModelo(modeloDetails.getAnoModelo());
+        modelo.setComprimentoVeiculo(modeloDetails.getComprimentoVeiculo());
+        modelo.setAlturaVeiculo(modeloDetails.getAlturaVeiculo());
+        modelo.setEixoVeiculo(modeloDetails.getEixoVeiculo());
+        modelo.setPesoVeiculo(modeloDetails.getPesoVeiculo());
+        // outros campos conforme necessário
+
+        return modeloRepository.save(modelo);
+    }
 }
