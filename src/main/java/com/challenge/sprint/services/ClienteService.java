@@ -28,10 +28,14 @@ public class ClienteService {
 		return clienteRepository.findAll();
 	}
 	
-	public Cliente findClienteById (@PathVariable Long id) {
-		Cliente result = clienteRepository.findById(id).get();
-		return result;
-	}
+	public Cliente findClienteById(@PathVariable Long id) {
+        Optional<Cliente> result = clienteRepository.findById(id);
+        if (result.isPresent()) {
+            return result.get();
+        } else {
+            throw new RuntimeException("Cliente não encontrado com o ID: " + id);
+        }
+    }
 	
 	public ResponseEntity<Cliente> saveCliente(Cliente cliente) {
         Cliente clienteCriado = clienteRepository.save(cliente);
