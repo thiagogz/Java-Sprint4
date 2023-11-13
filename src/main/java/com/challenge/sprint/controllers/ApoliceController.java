@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/apolices")
+@RequestMapping("/apolices")
 public class ApoliceController {
 
     private final ApoliceService apoliceService;

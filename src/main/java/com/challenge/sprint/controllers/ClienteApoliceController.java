@@ -38,12 +38,6 @@ public class ClienteApoliceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novoClienteApolice);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<ClienteApolice> updateClienteApolice(@PathVariable Long id, @RequestBody ClienteApolice clienteApolice) {
-//        ClienteApolice clienteApoliceAtualizado = clienteApoliceService.updateClienteApolice(id, clienteApolice);
-//        return ResponseEntity.ok(clienteApoliceAtualizado);
-//    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClienteApolice(@PathVariable Long id) {
         clienteApoliceService.deleteClienteApolice(id);

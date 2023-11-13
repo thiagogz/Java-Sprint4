@@ -1,7 +1,6 @@
 package com.challenge.sprint.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,7 @@ import com.challenge.sprint.entities.Empresa;
 import com.challenge.sprint.services.EmpresaService;
 
 @RestController
-@RequestMapping(value = "/empresas")
+@RequestMapping("/empresas")
 public class EmpresaController {
 	private final EmpresaService empresaService;
 	

@@ -46,16 +46,6 @@ public class ClienteApoliceService {
         clienteApoliceRepository.deleteById(id);
     }
 
-//    public ClienteApolice updateClienteApolice(Long id, ClienteApolice clienteApoliceDetails) {
-//        ClienteApolice clienteApolice = clienteApoliceRepository.findById(id)
-//            .orElseThrow(() -> new RuntimeException("Cliente Apolice não encontrado"));
-//        
-//        validateForeignKeyEntities(clienteApoliceDetails);
-//        
-//
-//        return clienteApoliceRepository.save(clienteApolice);
-//    }
-
     private void validateForeignKeyEntities(ClienteApolice clienteApolice) {
         if (clienteApolice.getCliente() != null && !clienteRepository.existsById(clienteApolice.getCliente().getIdCliente())) {
             throw new RuntimeException("Cliente associado não encontrado");

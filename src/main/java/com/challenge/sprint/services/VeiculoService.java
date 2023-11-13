@@ -1,9 +1,6 @@
 package com.challenge.sprint.services;
 
 import com.challenge.sprint.entities.Veiculo;
-import com.challenge.sprint.entities.Marca;
-import com.challenge.sprint.entities.TipoVeiculo;
-import com.challenge.sprint.entities.Modelo;
 import com.challenge.sprint.repositories.VeiculoRepository;
 import com.challenge.sprint.repositories.MarcaRepository;
 import com.challenge.sprint.repositories.TipoVeiculoRepository;

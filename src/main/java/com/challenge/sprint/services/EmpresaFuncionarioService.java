@@ -45,17 +45,7 @@ public class EmpresaFuncionarioService {
         }
         empresaFuncionarioRepository.deleteById(id);
     }
-
-//    public EmpresaFuncionario updateEmpresaFuncionario(Long id, EmpresaFuncionario empresaFuncionarioDetails) {
-//        EmpresaFuncionario empresaFuncionario = empresaFuncionarioRepository.findById(id)
-//            .orElseThrow(() -> new RuntimeException("Associação Empresa-Funcionário não encontrada"));
-//        
-//        validateForeignKeyEntities(empresaFuncionarioDetails);
-//        empresaFuncionario.set
-//        
-//        return empresaFuncionarioRepository.save(empresaFuncionario);
-//    }
-
+    
     private void validateForeignKeyEntities(EmpresaFuncionario empresaFuncionario) {
         if (empresaFuncionario.getEmpresa() != null && !empresaRepository.existsById(empresaFuncionario.getEmpresa().getIdEmpresa())) {
             throw new RuntimeException("Empresa associada não encontrada");

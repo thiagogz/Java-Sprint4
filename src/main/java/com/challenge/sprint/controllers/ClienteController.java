@@ -17,7 +17,7 @@ import com.challenge.sprint.entities.Cliente;
 import com.challenge.sprint.services.ClienteService;
 
 @RestController
-@RequestMapping(value = "/clientes")
+@RequestMapping("/clientes")
 public class ClienteController {
 	private final ClienteService clienteService;
 	
@@ -32,7 +32,7 @@ public class ClienteController {
 		return ResponseEntity.ok(clientes);
 	}
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping("/{id}")
 	public Cliente findClienteById (@PathVariable Long id) {
 		Cliente result = clienteService.findClienteById(id);
 		return result;

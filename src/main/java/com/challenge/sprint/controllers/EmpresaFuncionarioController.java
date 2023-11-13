@@ -38,12 +38,6 @@ public class EmpresaFuncionarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(novoEmpresaFuncionario);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<EmpresaFuncionario> updateEmpresaFuncionario(@PathVariable Long id, @RequestBody EmpresaFuncionario empresaFuncionario) {
-//        EmpresaFuncionario empresaFuncionarioAtualizado = empresaFuncionarioService.updateEmpresaFuncionario(id, empresaFuncionario);
-//        return ResponseEntity.ok(empresaFuncionarioAtualizado);
-//    }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEmpresaFuncionario(@PathVariable Long id) {
         empresaFuncionarioService.deleteEmpresaFuncionario(id);
