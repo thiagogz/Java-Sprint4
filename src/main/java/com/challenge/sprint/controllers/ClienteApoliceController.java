@@ -1,32 +1,52 @@
 package com.challenge.sprint.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.challenge.sprint.entities.ClienteApolice;
 import com.challenge.sprint.services.ClienteApoliceService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping(value = "/cliente-apolices")
+@RequestMapping("/cliente-apolices")
 public class ClienteApoliceController {
-	@Autowired 
-	private ClienteApoliceService clienteApoliceService;
-	
-	@GetMapping
-	public ResponseEntity<List<ClienteApolice>> findAll() {
-		List<ClienteApolice> clienteApolices = clienteApoliceService.getAllClienteApolice();
-		return ResponseEntity.ok(clienteApolices);
-	}
-	
-	@GetMapping(value = "/{id}")
-	public ClienteApolice findClienteApoliceById (@PathVariable Long id) {
-		ClienteApolice result = clienteApoliceService.findClienteApoliceById(id);
-		return result;
-	}
+
+    private final ClienteApoliceService clienteApoliceService;
+
+    @Autowired
+    public ClienteApoliceController(ClienteApoliceService clienteApoliceService) {
+        this.clienteApoliceService = clienteApoliceService;
+    }
+
+    @GetMapping
+    public List<ClienteApolice> getAllClienteApolices() {
+        return clienteApoliceService.getAllClienteApolices();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteApolice> getClienteApoliceById(@PathVariable Long id) {
+        ClienteApolice clienteApolice = clienteApoliceService.findClienteApoliceById(id)
+            .orElseThrow(() -> new RuntimeException("Cliente Apolice não encontrado"));
+        return ResponseEntity.ok(clienteApolice);
+    }
+
+    @PostMapping
+    public ResponseEntity<ClienteApolice> createClienteApolice(@RequestBody ClienteApolice clienteApolice) {
+        ClienteApolice novoClienteApolice = clienteApoliceService.saveClienteApolice(clienteApolice);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoClienteApolice);
+    }
+
+//    @PutMapping("/{id}")
+//    public ResponseEntity<ClienteApolice> updateClienteApolice(@PathVariable Long id, @RequestBody ClienteApolice clienteApolice) {
+//        ClienteApolice clienteApoliceAtualizado = clienteApoliceService.updateClienteApolice(id, clienteApolice);
+//        return ResponseEntity.ok(clienteApoliceAtualizado);
+//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteClienteApolice(@PathVariable Long id) {
+        clienteApoliceService.deleteClienteApolice(id);
+        return ResponseEntity.noContent().build();
+    }
 }
