@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/apolices")
@@ -46,7 +47,12 @@ public class ApoliceController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteApolice(@PathVariable Long id) {
-        apoliceService.deleteApolice(id);
-        return ResponseEntity.noContent().build();
+        Optional<Apolice> apolice = apoliceService.findApoliceById(id);
+        if (apolice.isPresent()) {
+            apoliceService.deleteApolice(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

@@ -1,35 +1,52 @@
 package com.challenge.sprint.controllers;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.challenge.sprint.entities.Prestador;
 import com.challenge.sprint.services.PrestadorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
-@RequestMapping(value = "/prestadores")
+@RequestMapping("/prestadores")
 public class PrestadorController {
-	private final PrestadorService prestadorService;
-	
-	@Autowired
-	public PrestadorController(PrestadorService prestadorService) {
+
+    private final PrestadorService prestadorService;
+
+    @Autowired
+    public PrestadorController(PrestadorService prestadorService) {
         this.prestadorService = prestadorService;
     }
-	
-	@GetMapping
-	public ResponseEntity<List<Prestador>> findAll() {
-		List<Prestador> prestadores = prestadorService.getAllPrestador();
-		return ResponseEntity.ok(prestadores);
-	}
-	
-	@GetMapping(value = "/{id}")
-	public Prestador findPrestadorById (@PathVariable Long id) {
-		Prestador result = prestadorService.findPrestadorById(id);
-		return result;
-	}
+
+    @GetMapping
+    public List<Prestador> getAllPrestadores() {
+        return prestadorService.getAllPrestadores();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Prestador> getPrestadorById(@PathVariable Long id) {
+        Prestador prestador = prestadorService.findPrestadorById(id)
+            .orElseThrow(() -> new RuntimeException("Prestador não encontrado"));
+        return ResponseEntity.ok(prestador);
+    }
+
+    @PostMapping
+    public ResponseEntity<Prestador> createPrestador(@RequestBody Prestador prestador) {
+        Prestador novoPrestador = prestadorService.savePrestador(prestador);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoPrestador);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Prestador> updatePrestador(@PathVariable Long id, @RequestBody Prestador prestador) {
+        Prestador prestadorAtualizado = prestadorService.updatePrestador(id, prestador);
+        return ResponseEntity.ok(prestadorAtualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePrestador(@PathVariable Long id) {
+        prestadorService.deletePrestador(id);
+        return ResponseEntity.noContent().build();
+    }
 }
